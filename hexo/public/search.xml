@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    
+    <entry>
+      <title><![CDATA[如何在一个小时内搭建好自己的博客]]></title>
+      <url>%2F2017%2F02%2F19%2F%E5%A6%82%E4%BD%95%E5%9C%A8%E4%B8%80%E4%B8%AA%E5%B0%8F%E6%97%B6%E5%86%85%E6%90%AD%E5%BB%BA%E5%A5%BD%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%2F</url>
+      <content type="text"><![CDATA[说明 搭建自己的博客是一件蛮有趣的事情，有很多种搭建博客的方式，之前就接触过WordPress。最近看到用hexo在github上搭建博客，在布局和搭建上非常的简便，能很快的搭建出自己的一个blog，当然这也是一个问题，当我们想要修改界面的时候就需要进行一些思考。接下来，就是简答的介绍如何一个小时搭建出自己的博客。 一、搭建步骤安装步骤 默认安装git客户端，下载地址 记得勾选上 simple comtext menu 和下面的 git bash here / git gui here cmd 中 git –version 查看版本信息 默认安装node.js，下载地址 node -v 查看node版本 npm -v 查看npm版本，node package managers github上创建仓库 ,yourname.git.io (如CatterMCG.git.io) 创建一个新的hexo的分支用于管理网站文件，在setting中选branch将hexo update为默认分支； master分支用于发布网站（github默认需要master来管理发布的网站） 新建新的分支hexo 并将hexo设置为默认分支非常重要 因为： 我们一般在同一台机器上进行博客的编写，但是在新的电脑上进行编写也是非常正常的需求，所以我们需要有一个分支用于管理网站的文件，在另外一台电脑上需要的时候只需要clone下来，然后编写就好了。如何在第二台电脑上进行编写会在后面说明。 不能保证我们本地的东西不会丢失，所以我们用github来 保存我的项目 在本地的 yourname.git.io 文件夹下新建一个hexo文件夹，然后依次执行下面指令 npm install hexo 用npm安装hexo hexo init hexo初始化 npm install npm自动安装需要的组件 npm install hexo-deployer-git –save 安装hexo git部署组件 (由于设置的默认分支是hexo，所以上面的所有的操作都是hexo分支下的) 说明 在项目中新建一个hexo的原因是，hexo init指令会自动将文件中的 .git文件删除，将东西放在一个新建的hexo文件夹里面很安全 如果安装网站上的直接在 yourname.git.io 文件夹下进行上面指令， .git 文件会删除，此时再重新建个git init, git checkout -b hexo分支就好了（window下） 6.修改hexo文件夹下的 _config.yml文件中的deploy参数,如下 deploy: type: git repo: git@github.com:CatterMCG/CatterMCG.github.io.git branch: master 7.依次执行下面命令 git add . 添加所有文件 git commit -m “first commit” 提交添加的文件，提交信息是 first commit（注意分支是hexo） git push origin hexo 推送到github（可以自己去github项目中查看文件 是否推送成功） 8.执行 hexo d -g 将项目生产网站 并 部署到github上，可以在用yourname.git.io 访问 如 cattermcg.git.io 日常改动流程： 修改配置，写博客等操作，用hexo s -debug 运行，在localhost:4000调试 git add . / git commit -m “…” / git push origin hexo 将项目推送到github上 hexo d -g 将项目部署到github上 在不同的电脑上写博客： 安装git 和 node.js git clone git@github.com:CatterMCG/CatterMCG.github.io.git 将repo克隆到本地 在 CatterMCG.github.io 文件夹下 git bash 依次执行 npm hexo npm install npm hexo-deployer-git –save 切记：此时不用hexo init 修改配置，写博客，跟前面的操作相同 二、hexo命令的简单使用 hexo new post “title” 新建一片md类型的文章 hexo g生产项目 hexo s 开始项目，这个时候可以在localhost:4000访问本地的网站 hexo d 部署项目到github上 日常使用的方式是： 在本地测试的时候，用 hexo s -debug，这用于本地开启服务 在localhost:4000 测试自己的博客 本地测试完毕想部署，用 hexo d -g，将项目部署到github ，其他的hexo 基本用不上 三、hexo网站和theme中的重要设置基本设置 主题风格配置 菜单配置 头像配置 设置文章代码主题 添加tag页面 添加categories页面 添加about页面 添加search功能 请查看详细操作：http://www.cnblogs.com/syd192/p/6074323.html 引入第三方 使用 多说 添加 评论区 使用 多说 添加 分享功能 1 2 继续查看文章 http://www.cnblogs.com/syd192/p/6074323.html 使用 leancloud 添加显示 阅读量：leanCloud实现文章阅读量统计 官方 NexT 官网 NexT的github地址 有哪些好看的hexo主题 四、有些坑不要踩 用leancloud设置阅读量的时候，class一定要为Counter 访问量竟然出现了1:1:1:1 的形式，原因是在leancloud的数据库中查询到了相同的文章有两条记录，把最开始的一条访问量记录为1的删除了就可以了 搭建hexo，在执行 hexo deploy后，出现 error deployer not found:github 的错误 重现用npm install hexo-deployer-git –save就好了 出现hexo command not found 的时候 用对应的 nodemoudle路劲下的 （G:\hexo\node_modules.bin）将其添加到系统环境变量中，或者把 nodemoudle下hexo 里面 的 bin添加进去 如果想要在多台电脑上进行管理的话，真的要有新的 branch 或者 repo来管里hexo的东西，发布的东西在yourname.git.io这个repo的master分支上；具体的相关操作上面都有 ​]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>%2F2017%2F02%2F19%2Fhello-world%2F</url>
+      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    </entry>
+
+    
+  
+  
+</search>
