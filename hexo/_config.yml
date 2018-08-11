@@ -3,14 +3,14 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 王子安静
-subtitle: stay foolish stay hungry 
+title: CatterMCG
+subtitle: 你说远方有梦 你要去追梦，那你在远方等我 我去追你 
 description: 
-author: 马成刚
+author: 
 language: zh-Hans
 timezone:
 
-avatar: /images/1.jpg
+avatar: /images/2.png
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
